@@ -70,7 +70,6 @@ if (typeof callback=="undefined")
 
 	callback=function(e){
 	        var win = tinyMCEPopup.getWindowArg("window");
-	        //就这句关键，IMG_URI应该由服务端生成
 	        win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = e;
 	        tinyMCEPopup.close();
 	}

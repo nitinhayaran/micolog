@@ -24,12 +24,24 @@
 	 {
 	    $.blockUI({ message: '<h3 id="bmsg"><img src="/static/images/busy.gif" /> Rebuild URLs now...</h3>' });
 	 	$.getJSON("/admin/do/updatelink",{'linkfmt':$('#link_format').val()}, function(json){
-	 		  $('#bmsg').html(json+'<br/><input type="button" value="Ok" onclick="$.unblockUI()"></input>');
-	 		  $('.blockUI').css('cursor','');
-
-
+              if(json.complete==1){
+                  $('#bmsg').html(json.message+'<br/><input type="button" value="Ok" onclick="$.unblockUI()"></input>');
+                  $('.blockUI').css('cursor','');
+              }else{
+                  rebuild_link(json);
+              }
 	 		});
 	 }
+     function rebuild_link(json){
+        $.getJSON("/admin/do/updatelink",{'linkfmt':$('#link_format').val(), 'offset':json.offset}, function(json){
+              if(json.complete==1){
+                  $('#bmsg').html(json.message+'<br/><input type="button" value="Ok" onclick="$.unblockUI()"></input>');
+                  $('.blockUI').css('cursor','');
+              }else{
+                  rebuild_link(json);
+              }
+	 		});
+     }
 	 function update_comments()
 	 {
 	    $.blockUI({ message: '<h3 id="bmsg"><img src="/static/images/busy.gif" /> Refresh comments now...</h3>' });
@@ -122,7 +134,7 @@
 <p>
 {%trans "Permalink"%}:
 <input type='text' id='link_format' value='{{self.blog.link_format}}' style='width:550px'/>
-<br>{%trans "Available parameters:"%} %(year)s , %(month)s , %(day)s , %(postname)s , %(post_id)s<br>
+<br>{%trans "Available parameters:"%} %(year)s , %(month)s , %(day)s , %(postname)s , %(post_id)s, %(category)s<br>
 </p>
 </div>
 <div class="grid">

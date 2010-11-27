@@ -7,7 +7,8 @@ TEMPLATE_DEBUG = False
 
 ##LANGUAGE_CODE = 'zh-CN'
 ##LANGUAGE_CODE = 'fr'
-LOCALE_PATHS = 'locale'
+LANGUAGE_CODE = 'en-us'
+#LOCALE_PATHS = 'locale'
 USE_I18N = True
 
 TEMPLATE_LOADERS=('django.template.loaders.filesystem.load_template_source',

@@ -4,6 +4,11 @@
 {%mf head%}
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8;" />
 <title>{% block title %} {{ blog.title}}{% endblock %}</title>
+
+<meta name="description" content="{%block meta_desc%}{{blog.description}}{%endblock%}" />
+<meta name="keywords" content="{%block meta_keywords%}{%endblock%}" />
+<link rel="canonical" href="{%block canonical_url%}{{blog.baseurl}}{%endblock%}" />
+
 <link rel="stylesheet" href="/themes/{{ blog.theme_name }}/style.css" type="text/css" media="screen" />
 <link rel="alternate" type="application/rss+xml" title="{{ blog.title }} RSS Feed" href="{{ blog.feedurl }}" />
 <link href="/static/wlwmanifest.xml" type="application/wlwmanifest+xml" rel="wlwmanifest"/>
